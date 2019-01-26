@@ -12,5 +12,6 @@ export const AppConstants: AppConstantsInterface = {
 };
 
 // Injection token to be used to override the default options for the chips module
-export const APP_CONSTANTS =
-    new InjectionToken<AppConstantsInterface>('Application constants');
+export const APP_CONSTANTS = new InjectionToken<AppConstantsInterface>(
+    'Application constants'
+);
