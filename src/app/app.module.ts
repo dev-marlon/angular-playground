@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { APP_CONSTANTS, AppConstants, AppConstantsInterface } from './app.constants';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,13 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+      {
+          provide: APP_CONSTANTS,
+          // We can override this object in tests
+          useValue: AppConstants as AppConstantsInterface
+      }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
