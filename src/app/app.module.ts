@@ -8,10 +8,11 @@ import {
     AppConstants,
     AppConstantsInterface,
 } from './app.constants';
+import { CancelRequestModule } from './cancel-request/cancel-request.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule],
+    imports: [BrowserModule, AppRoutingModule, CancelRequestModule],
     providers: [
         {
             provide: APP_CONSTANTS,
