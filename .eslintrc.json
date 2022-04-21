@@ -1,7 +1,7 @@
 {
     "root": true,
     "ignorePatterns": ["**/*"],
-    "plugins": ["@nrwl/nx"],
+    "plugins": ["@nrwl/nx", "import", "rxjs", "rxjs-angular"],
     "overrides": [
         {
             "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -22,9 +22,89 @@
             }
         },
         {
-            "files": ["*.ts", "*.tsx"],
-            "extends": ["plugin:@nrwl/nx/typescript"],
-            "rules": {}
+            "files": ["*.ts"],
+            "extends": [
+                "plugin:@nrwl/nx/typescript",
+                "plugin:import/typescript"
+            ],
+            "rules": {
+                "guard-for-in": "error",
+                "no-console": [
+                    "error",
+                    {
+                        "allow": [
+                            "debug",
+                            "info",
+                            "time",
+                            "timeEnd",
+                            "trace",
+                            "error"
+                        ]
+                    }
+                ],
+                "one-var": ["error", "never"],
+                "import/order": [
+                    "error",
+                    {
+                        "newlines-between": "always",
+                        "pathGroups": [
+                            {
+                                "pattern": "@omen/**",
+                                "group": "external",
+                                "position": "after"
+                            }
+                        ],
+                        "pathGroupsExcludedImportTypes": ["builtin"]
+                    }
+                ],
+                "@typescript-eslint/explicit-member-accessibility": [
+                    "error",
+                    {
+                        "accessibility": "explicit",
+                        "overrides": {
+                            "constructors": "no-public"
+                        }
+                    }
+                ],
+                "@typescript-eslint/explicit-function-return-type": "error",
+                "@typescript-eslint/typedef": [
+                    "error",
+                    {
+                        "arrayDestructuring": true,
+                        "arrowParameter": true,
+                        "memberVariableDeclaration": true,
+                        "objectDestructuring": true,
+                        "parameter": true,
+                        "propertyDeclaration": true,
+                        "variableDeclaration": true,
+                        "variableDeclarationIgnoreFunction": true
+                    }
+                ],
+                "@typescript-eslint/no-inferrable-types": [
+                    "error",
+                    {
+                        "ignoreParameters": true,
+                        "ignoreProperties": true
+                    }
+                ],
+                "@typescript-eslint/no-empty-function": "off",
+                "rxjs/no-async-subscribe": "error",
+                "rxjs/no-create": "error",
+                "rxjs/no-ignored-notifier": "error",
+                "rxjs/no-ignored-replay-buffer": "error",
+                "rxjs/no-ignored-takewhile-value": "error",
+                "rxjs/no-index": "error",
+                "rxjs/no-internal": "error",
+                "rxjs/no-nested-subscribe": "error",
+                "rxjs/no-redundant-notify": "error",
+                "rxjs/no-sharereplay": "error",
+                "rxjs/no-subject-unsubscribe": "error",
+                "rxjs/no-unbound-methods": "error",
+                "rxjs/no-unsafe-subject-next": "error",
+                "rxjs/no-unsafe-takeuntil": "error",
+                "rxjs-angular/prefer-async-pipe": "warn",
+                "rxjs-angular/prefer-takeuntil": "error"
+            }
         },
         {
             "files": ["*.js", "*.jsx"],
