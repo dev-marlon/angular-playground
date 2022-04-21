@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "cli": "nx",
+    "$id": "library",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Library name",
+            "x-prompt": "What is the name of the library?",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "scope": {
+            "type": "string",
+            "default": "shared",
+            "enum": ["angular-playground", "shared"],
+            "x-prompt": {
+                "message": "Choose a scope",
+                "type": "list",
+                "items": [
+                    {
+                        "value": "angular-playground",
+                        "label": "angular-playground"
+                    },
+                    {
+                        "value": "shared",
+                        "label": "shared"
+                    }
+                ]
+            }
+        },
+        "layer": {
+            "type": "string",
+            "default": "shared",
+            "enum": [
+                "ui",
+                "features",
+                "state",
+                "business-domain",
+                "data-domain",
+                "infrastructure"
+            ],
+            "x-prompt": {
+                "message": "Choose a layer",
+                "type": "list",
+                "items": [
+                    {
+                        "value": "ui",
+                        "label": "ui                [ presentational components      ]"
+                    },
+                    {
+                        "value": "features",
+                        "label": "features          [ controller components, pages   ]"
+                    },
+                    {
+                        "value": "state",
+                        "label": "state             [ state-management               ]"
+                    },
+                    {
+                        "value": "business-domain",
+                        "label": "business-domain   [ business logic                 ]"
+                    },
+                    {
+                        "value": "data-domain",
+                        "label": "data-domain       [ communication with APIs        ]"
+                    },
+                    {
+                        "value": "infrastructure",
+                        "label": "infrastructure    [ deep technical utilities       ]"
+                    }
+                ]
+            }
+        }
+    },
+    "required": ["name", "scope", "layer"]
+}
