@@ -2,7 +2,6 @@
     "version": 2,
     "projects": {
         "angular-playground": "apps/angular-playground",
-        "angular-playground-e2e": "apps/angular-playground-e2e",
-        "shared-state-foo-store": "libs/shared/state/foo-store"
+        "angular-playground-e2e": "apps/angular-playground-e2e"
     }
 }
