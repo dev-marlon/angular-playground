@@ -14,7 +14,11 @@
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "@angular-playground/shared/state/foo-store": [
+                "libs/shared/state/foo-store/src/index.ts"
+            ]
+        }
     },
     "exclude": ["node_modules", "tmp"]
 }

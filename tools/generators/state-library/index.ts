@@ -11,6 +11,12 @@ const pathDelimiter = '/';
 const libraryLayerName = 'state';
 const templatePathName = 'files';
 
+function camelize(value: string): string {
+    return value
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+}
+
 function uppercase(value: string) {
     return value.toUpperCase();
 }
@@ -28,8 +34,10 @@ function lowercaseFirstLetter(value: string) {
 }
 
 export default async function (host: Tree, schema: any) {
+    const camelizedName = camelize(schema.name);
+
     await libraryGenerator(host, {
-        name: schema.name,
+        name: camelizedName,
         simpleModuleName: true,
         directory: [schema.scope, libraryLayerName].join(pathDelimiter),
         standaloneConfig: true,
@@ -45,7 +53,7 @@ export default async function (host: Tree, schema: any) {
             uppercaseFirstLetter,
             lowercase,
             lowercaseFirstLetter,
-            name: schema.name,
+            name: camelizedName,
         }
     );
 
