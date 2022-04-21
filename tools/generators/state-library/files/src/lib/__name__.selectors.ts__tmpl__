@@ -1,0 +1,37 @@
+import {
+    createFeatureSelector,
+    createSelector,
+    MemoizedSelector,
+} from '@ngrx/store';
+
+import {
+    <%= uppercase(name) %>_FEATURE_KEY,
+    <%= uppercaseFirstLetter(name) %>State,
+    <%= uppercaseFirstLetter(name) %>PartialState,
+} from './<%= lowercaseFirstLetter(name) %>.reducer';
+
+export const get<%= uppercaseFirstLetter(name) %>State: MemoizedSelector<
+    <%= uppercaseFirstLetter(name) %>PartialState,
+    <%= uppercaseFirstLetter(name) %>State
+> = createFeatureSelector<<%= uppercaseFirstLetter(name) %>State>(<%= uppercase(name) %>_FEATURE_KEY);
+
+export const get<%= uppercaseFirstLetter(name) %>IsLoading: MemoizedSelector<
+    <%= uppercaseFirstLetter(name) %>PartialState,
+    boolean
+> = createSelector(
+    get<%= uppercaseFirstLetter(name) %>State,
+    (state: <%= uppercaseFirstLetter(name) %>State) => state.isLoading
+);
+
+export const get<%= uppercaseFirstLetter(name) %>Error: MemoizedSelector<
+    <%= uppercaseFirstLetter(name) %>PartialState,
+    string | undefined
+> = createSelector(get<%= uppercaseFirstLetter(name) %>State, (state: <%= uppercaseFirstLetter(name) %>State) => state.error);
+
+export const getAll<%= uppercaseFirstLetter(name) %>: MemoizedSelector<
+    <%= uppercaseFirstLetter(name) %>PartialState,
+    string[]
+> = createSelector(
+    get<%= uppercaseFirstLetter(name) %>State,
+    (state: <%= uppercaseFirstLetter(name) %>State) => state.<%= lowercaseFirstLetter(name) %>
+);

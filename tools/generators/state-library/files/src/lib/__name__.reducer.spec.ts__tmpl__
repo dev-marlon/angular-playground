@@ -1,0 +1,54 @@
+import { Action } from '@ngrx/store';
+
+import { <%= uppercaseFirstLetter(name) %>State, initialState, reducer } from './<%= lowercase(name) %>.reducer';
+import {
+    load<%= uppercaseFirstLetter(name) %>,
+    load<%= uppercaseFirstLetter(name) %>Success,
+    load<%= uppercaseFirstLetter(name) %>Failure,
+} from './<%= lowercase(name) %>.actions';
+
+describe('<%= uppercaseFirstLetter(name) %> Reducer', () => {
+    describe('valid <%= uppercaseFirstLetter(name) %> actions', () => {
+        it('load<%= uppercaseFirstLetter(name) %> should set loading state', () => {
+            const action: Action = load<%= uppercaseFirstLetter(name) %>();
+
+            const result: <%= uppercaseFirstLetter(name) %>State = reducer(initialState, action);
+
+            expect(result).toStrictEqual({
+                <%= lowercase(name) %>: [],
+                isLoading: true,
+                error: undefined,
+            });
+        });
+    });
+
+    it('load<%= uppercaseFirstLetter(name) %>Success should return the list of <%= lowercase(name) %>', () => {
+        const action: Action = load<%= uppercaseFirstLetter(name) %>Success({
+            <%= lowercase(name) %>: ['<%= uppercaseFirstLetter(name) %> 1', '<%= uppercaseFirstLetter(name) %> 2', '<%= uppercaseFirstLetter(name) %> 3'],
+        });
+
+        const result: <%= uppercaseFirstLetter(name) %>State = reducer(initialState, action);
+
+        expect(result.<%= lowercase(name) %>.length).toBe(3);
+    });
+
+    it('load<%= uppercaseFirstLetter(name) %>Failure should return an error', () => {
+        const action: Action = load<%= uppercaseFirstLetter(name) %>Failure({
+            error: 'Some error',
+        });
+
+        const result: <%= uppercaseFirstLetter(name) %>State = reducer(initialState, action);
+
+        expect(result.error.length).toBeGreaterThan(1);
+    });
+});
+
+describe('unknown action', () => {
+    it('should return the previous state', () => {
+        const action: Action = {} as Action;
+
+        const result: <%= uppercaseFirstLetter(name) %>State = reducer(initialState, action);
+
+        expect(result).toBe(initialState);
+    });
+});

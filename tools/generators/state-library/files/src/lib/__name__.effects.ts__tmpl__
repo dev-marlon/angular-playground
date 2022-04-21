@@ -1,0 +1,35 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import * as <%= uppercaseFirstLetter(name) %>Actions from './<%= lowercase(name) %>.actions';
+
+@Injectable()
+export class <%= uppercaseFirstLetter(name) %>Effects {
+    // eslint-disable-next-line @typescript-eslint/typedef
+    public init$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(<%= uppercaseFirstLetter(name) %>Actions.load<%= uppercaseFirstLetter(name) %>),
+            switchMap(() => {
+                return of([]).pipe(
+                    map((<%= lowercase(name) %>: string[]) => {
+                        return {
+                            type: <%= uppercaseFirstLetter(name) %>Actions.load<%= uppercaseFirstLetter(name) %>Success.type,
+                            <%= lowercase(name) %>,
+                        };
+                    }),
+                    catchError((error: HttpErrorResponse) => {
+                        return of({
+                            type: <%= uppercaseFirstLetter(name) %>Actions.load<%= uppercaseFirstLetter(name) %>Failure.type,
+                            error: error.error?.cause || error.error,
+                        });
+                    })
+                );
+            })
+        );
+    });
+
+    constructor(private readonly actions$: Actions) {}
+}

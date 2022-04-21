@@ -1,0 +1,54 @@
+import { createReducer, on, Action, ActionReducer } from '@ngrx/store';
+
+import * as <%= uppercaseFirstLetter(name) %>Actions from './<%= lowercase(name) %>.actions';
+
+// eslint-disable-next-line @typescript-eslint/typedef
+export const <%= uppercase(name) %>_FEATURE_KEY = '<%= lowercase(name) %>';
+
+export interface <%= uppercaseFirstLetter(name) %>State {
+    <%= lowercase(name) %>: string[];
+    isLoading: boolean;
+    error?: string;
+}
+
+export interface <%= uppercaseFirstLetter(name) %>PartialState {
+    readonly [<%= uppercase(name) %>_FEATURE_KEY]: <%= uppercaseFirstLetter(name) %>State;
+}
+
+export const initialState: <%= uppercaseFirstLetter(name) %>State = {
+    <%= lowercase(name) %>: [],
+    isLoading: false,
+};
+
+const <%= lowercase(name) %>Reducer: ActionReducer<<%= uppercaseFirstLetter(name) %>State> = createReducer(
+    initialState,
+    on(<%= uppercaseFirstLetter(name) %>Actions.load<%= uppercaseFirstLetter(name) %>, (state: <%= uppercaseFirstLetter(name) %>State) => ({
+        ...state,
+        <%= lowercase(name) %>: [],
+        isLoading: true,
+        error: undefined,
+    })),
+    on(
+        <%= uppercaseFirstLetter(name) %>Actions.load<%= uppercaseFirstLetter(name) %>Success,
+        (state: <%= uppercaseFirstLetter(name) %>State, { <%= lowercase(name) %> }: { <%= lowercase(name) %>: string[] }) => ({
+            ...state,
+            isLoading: false,
+            <%= lowercase(name) %>,
+        })
+    ),
+    on(
+        <%= uppercaseFirstLetter(name) %>Actions.load<%= uppercaseFirstLetter(name) %>Failure,
+        (state: <%= uppercaseFirstLetter(name) %>State, { error }: { error: string }) => ({
+            ...state,
+            isLoading: false,
+            error,
+        })
+    )
+);
+
+export function reducer(
+    state: <%= uppercaseFirstLetter(name) %>State | undefined,
+    action: Action
+): <%= uppercaseFirstLetter(name) %>State {
+    return <%= lowercase(name) %>Reducer(state, action);
+}

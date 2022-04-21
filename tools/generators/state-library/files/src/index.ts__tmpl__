@@ -1,0 +1,17 @@
+export { <%= uppercaseFirstLetter(name) %>Module as State<%= uppercaseFirstLetter(name) %>Module } from './lib/<%= lowercaseFirstLetter(name) %>.module';
+export { <%= uppercaseFirstLetter(name) %>State, <%= uppercaseFirstLetter(name) %>PartialState } from './lib/<%= lowercaseFirstLetter(name) %>.reducer';
+
+export {
+    getAll<%= uppercaseFirstLetter(name) %>,
+    get<%= uppercaseFirstLetter(name) %>Error,
+    get<%= uppercaseFirstLetter(name) %>State,
+    get<%= uppercaseFirstLetter(name) %>IsLoading,
+} from './lib/<%= lowercaseFirstLetter(name) %>.selectors';
+
+export {
+    load<%= uppercaseFirstLetter(name) %>,
+    load<%= uppercaseFirstLetter(name) %>Success,
+    load<%= uppercaseFirstLetter(name) %>Failure,
+} from './lib/<%= lowercaseFirstLetter(name) %>.actions';
+
+export * from './lib/<%= lowercaseFirstLetter(name) %>.effects';

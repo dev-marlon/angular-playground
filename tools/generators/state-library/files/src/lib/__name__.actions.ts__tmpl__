@@ -1,0 +1,16 @@
+import { createAction, props } from '@ngrx/store';
+
+// eslint-disable-next-line @typescript-eslint/typedef
+export const load<%= uppercaseFirstLetter(name) %> = createAction('[<%= uppercaseFirstLetter(name) %>] Load <%= lowercase(name) %>');
+
+// eslint-disable-next-line @typescript-eslint/typedef
+export const load<%= uppercaseFirstLetter(name) %>Success = createAction(
+    '[<%= uppercaseFirstLetter(name) %>] Load <%= lowercase(name) %> success',
+    props<{ <%= lowercase(name) %>: string[] }>()
+);
+
+// eslint-disable-next-line @typescript-eslint/typedef
+export const load<%= uppercaseFirstLetter(name) %>Failure = createAction(
+    '[<%= uppercaseFirstLetter(name) %>] Load <%= lowercase(name) %> failure',
+    props<{ error: string }>()
+);

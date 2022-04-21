@@ -1,0 +1,48 @@
+import {
+    <%= uppercaseFirstLetter(name) %>PartialState,
+    initialState,
+    <%= uppercase(name) %>_FEATURE_KEY,
+} from './<%= lowercase(name) %>.reducer';
+import {
+    getAll<%= uppercaseFirstLetter(name) %>,
+    get<%= uppercaseFirstLetter(name) %>IsLoading,
+    get<%= uppercaseFirstLetter(name) %>Error,
+} from './<%= lowercase(name) %>.selectors';
+
+describe('<%= uppercaseFirstLetter(name) %> Selectors', () => {
+    // eslint-disable-next-line @typescript-eslint/typedef
+    const ERROR_MSG = 'No Error Available';
+
+    let state: <%= uppercaseFirstLetter(name) %>PartialState;
+
+    beforeEach(() => {
+        state = {
+            [<%= uppercase(name) %>_FEATURE_KEY]: {
+                ...initialState,
+                <%= lowercase(name) %>: [],
+                error: ERROR_MSG,
+                isLoading: true,
+            },
+        };
+    });
+
+    describe('<%= uppercaseFirstLetter(name) %> Selectors', () => {
+        it('getAll<%= uppercaseFirstLetter(name) %>() should return the list of <%= uppercaseFirstLetter(name) %>', () => {
+            const results: string[] = getAll<%= uppercaseFirstLetter(name) %>(state);
+
+            expect(results.length).toBe(0);
+        });
+
+        it('getIsLoading() should return the current "loading"" status', () => {
+            const result: boolean = get<%= uppercaseFirstLetter(name) %>IsLoading(state);
+
+            expect(result).toBe(true);
+        });
+
+        it('get<%= uppercaseFirstLetter(name) %>Error() should return the current "error" state', () => {
+            const result: string = get<%= uppercaseFirstLetter(name) %>Error(state);
+
+            expect(result).toBe(ERROR_MSG);
+        });
+    });
+});

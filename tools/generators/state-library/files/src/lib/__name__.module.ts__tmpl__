@@ -1,0 +1,19 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import * as from<%= uppercaseFirstLetter(name) %> from './<%= lowercase(name) %>.reducer';
+import { <%= uppercaseFirstLetter(name) %>Effects } from './<%= lowercase(name) %>.effects';
+
+@NgModule({
+    imports: [
+        CommonModule,
+        StoreModule.forFeature(
+            from<%= uppercaseFirstLetter(name) %>.<%= uppercase(name) %>_FEATURE_KEY,
+            from<%= uppercaseFirstLetter(name) %>.reducer
+        ),
+        EffectsModule.forFeature([<%= uppercaseFirstLetter(name) %>Effects]),
+    ],
+})
+export class <%= uppercaseFirstLetter(name) %>Module {}
