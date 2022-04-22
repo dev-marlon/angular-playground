@@ -1,16 +1,27 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { aws_s3 as s3, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
+import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class CdkStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
-    super(scope, id, props);
+    constructor(scope: Construct, id: string, props?: StackProps) {
+        super(scope, id, props);
 
-    // The code that defines your stack goes here
+        const bucket: s3.Bucket = new s3.Bucket(
+            this,
+            'angularPlaygroundAppBucket',
+            {
+                versioned: true,
+                removalPolicy: RemovalPolicy.DESTROY,
+                websiteIndexDocument: 'index.html',
+                publicReadAccess: true,
+            }
+        );
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'CdkQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
-  }
+        new s3deploy.BucketDeployment(this, 'Deploy', {
+            sources: [
+                s3deploy.Source.asset('../../../dist/apps/angular-playground'),
+            ],
+            destinationBucket: bucket,
+        });
+    }
 }
